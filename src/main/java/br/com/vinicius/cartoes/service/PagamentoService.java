@@ -2,6 +2,7 @@ package br.com.vinicius.cartoes.service;
 
 import br.com.vinicius.cartoes.entity.CartaoEntity;
 import br.com.vinicius.cartoes.entity.PagamentoEntity;
+import br.com.vinicius.cartoes.exceptions.CartaoNaoHabilitadoException;
 import br.com.vinicius.cartoes.exceptions.CartaoNotFoundException;
 import br.com.vinicius.cartoes.mapper.PagamentoMapper;
 import br.com.vinicius.cartoes.model.PagamentoModel;
@@ -29,14 +30,17 @@ public class PagamentoService {
         Optional<CartaoEntity> cartaoEntity = cartaoRepository.findById(entity.getCartao_id());
 
         if(cartaoEntity.isPresent()){
-            PagamentoEntity newPagamento = this.repository.save(entity);
-            return mapper.to(newPagamento);
+            if(cartaoEntity.get().isAtivo()){
+                PagamentoEntity newPagamento = repository.save(entity);
+                return mapper.to(newPagamento);
+            }else
+                throw new CartaoNaoHabilitadoException();
         }else
             throw new CartaoNotFoundException();
     }
 
     public List<PagamentoModel> extratoPagamento(Long id_cartao) {
-        List<PagamentoEntity> listaEntity = this.repository.findAll();
+        List<PagamentoEntity> listaEntity = repository.findAll();
         return listaEntity
                 .stream()
                 .map(entity -> mapper.to(entity))

@@ -4,6 +4,7 @@ import br.com.vinicius.cartoes.entity.ClienteEntity;
 import br.com.vinicius.cartoes.mapper.ClienteMapper;
 import br.com.vinicius.cartoes.model.ClienteModel;
 import br.com.vinicius.cartoes.service.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/cliente")
 public class ClienteController {
 
+    @Autowired
     private ClienteService service;
+    @Autowired
     private ClienteMapper mapper;
-
-    public ClienteController(ClienteService service, ClienteMapper mapper){
-        this.service = service;
-        this.mapper = mapper;
-    }
 
     @PostMapping
     public ResponseEntity<ClienteModel> cadastrarCliente(@RequestBody ClienteModel cliente) {

@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface CartaoRepository extends JpaRepository<CartaoEntity, Long> {
 
-    @Query("select c from CartaoEntity c where c.numero = :numero")
-    Optional<CartaoEntity> findCardByNumber(String numero);
+    Optional<CartaoEntity> findCardByNumero(String numero);
 
 }
