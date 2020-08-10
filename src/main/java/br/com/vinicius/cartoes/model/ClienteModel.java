@@ -3,7 +3,7 @@ package br.com.vinicius.cartoes.model;
 public class ClienteModel {
 
     private Long id;
-    private String nomeCliente;
+    private String name;
 
     public Long getId() {
         return id;
@@ -13,11 +13,11 @@ public class ClienteModel {
         this.id = id;
     }
 
-    public String getNomeCliente() {
-        return nomeCliente;
+    public String getName() {
+        return name;
     }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
+    public void setName(String name) {
+        this.name = name;
     }
 }

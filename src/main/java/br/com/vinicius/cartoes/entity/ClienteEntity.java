@@ -1,9 +1,8 @@
 package br.com.vinicius.cartoes.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "TABELA_CLIENTE")
@@ -13,6 +12,7 @@ public class ClienteEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clienteId;
 
+    @NotBlank(message = "Campo obrigatório")
     private String nomeCliente;
 
     public Long getClienteId() {

@@ -11,14 +11,14 @@ public class ClienteMapper {
 
     public ClienteEntity from (ClienteModel model){
         ClienteEntity entity = new ClienteEntity();
-        entity.setNomeCliente(model.getNomeCliente());
+        entity.setNomeCliente(model.getName());
         return entity;
     }
 
     public ClienteModel to (ClienteEntity entity) {
         ClienteModel model = new ClienteModel();
         model.setId(entity.getClienteId());
-        model.setNomeCliente(entity.getNomeCliente());
+        model.setName(entity.getNomeCliente());
         return model;
     }
 }

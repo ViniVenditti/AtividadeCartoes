@@ -1,5 +1,7 @@
 package br.com.vinicius.cartoes.controller;
 
+import javax.validation.Valid;
+
 import br.com.vinicius.cartoes.entity.ClienteEntity;
 import br.com.vinicius.cartoes.mapper.ClienteMapper;
 import br.com.vinicius.cartoes.model.ClienteModel;
@@ -19,7 +21,7 @@ public class ClienteController {
     private ClienteMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ClienteModel> cadastrarCliente(@RequestBody ClienteModel cliente) {
+    public ResponseEntity<ClienteModel> cadastrarCliente(@Valid @RequestBody ClienteModel cliente) {
         ClienteEntity entity = mapper.from(cliente);
         ClienteModel newUser = service.createUser(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
