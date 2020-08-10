@@ -2,6 +2,7 @@ package br.com.vinicius.cartoes.service;
 
 import br.com.vinicius.cartoes.entity.CartaoEntity;
 import br.com.vinicius.cartoes.entity.ClienteEntity;
+import br.com.vinicius.cartoes.exceptions.CartaoExistenteException;
 import br.com.vinicius.cartoes.exceptions.CartaoNotFoundException;
 import br.com.vinicius.cartoes.exceptions.ClienteNotFoundException;
 import br.com.vinicius.cartoes.mapper.CartaoMapper;
@@ -26,10 +27,13 @@ public class CartaoService {
     public CartaoModel createCard(CartaoEntity entity) {
         CartaoEntity newCard;
         Optional<ClienteEntity> cliente = clienteRepository.findById(entity.getClienteId());
-        if(cliente.isPresent()) {
+        Optional<CartaoEntity> cartao = cartaoRepository.findCardByNumero(entity.getNumero());
+        if(cliente.isPresent() && cartao.isEmpty()) {
             newCard = cartaoRepository.save(entity);
             return mapper.to(newCard);
-        }
+        } else if (cartao.isPresent())
+            throw new CartaoExistenteException();
+
         throw new ClienteNotFoundException();
     }
 
