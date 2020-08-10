@@ -1,6 +1,7 @@
 package br.com.vinicius.cartoes.mapper;
 
 import br.com.vinicius.cartoes.entity.CartaoEntity;
+import br.com.vinicius.cartoes.model.CartaoDTO;
 import br.com.vinicius.cartoes.model.CartaoModel;
 import org.springframework.stereotype.Component;
 
@@ -26,5 +27,14 @@ public class CartaoMapper {
         entity.setClienteId(model.getClienteId());
 
         return entity;
+    }
+
+    public CartaoDTO mapperdto (CartaoModel model) {
+        CartaoDTO dto = new CartaoDTO();
+        dto.setClienteId(model.getClienteId());
+        dto.setId(model.getId());
+        dto.setNumero(model.getNumero());
+
+        return dto;
     }
 }

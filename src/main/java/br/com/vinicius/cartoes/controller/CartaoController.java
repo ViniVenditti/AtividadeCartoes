@@ -2,6 +2,7 @@ package br.com.vinicius.cartoes.controller;
 
 import br.com.vinicius.cartoes.entity.CartaoEntity;
 import br.com.vinicius.cartoes.mapper.CartaoMapper;
+import br.com.vinicius.cartoes.model.CartaoDTO;
 import br.com.vinicius.cartoes.model.CartaoModel;
 import br.com.vinicius.cartoes.service.CartaoService;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,10 @@ public class CartaoController {
     }
 
     @GetMapping(value = "/{numero}")
-    public ResponseEntity<CartaoModel> consultarCartao(@PathVariable String numero) {
+    public ResponseEntity<CartaoDTO> consultarCartao(@PathVariable String numero) {
         CartaoModel cartao = service.buscarCartao(numero);
-        return ResponseEntity.status(HttpStatus.OK).body(cartao);
+        CartaoDTO dto = mapper.mapperdto(cartao);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
 }
