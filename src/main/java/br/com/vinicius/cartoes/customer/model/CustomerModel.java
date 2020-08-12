@@ -1,8 +1,17 @@
-package br.com.vinicius.cartoes.model;
+package br.com.vinicius.cartoes.customer.model;
 
-public class ClienteModel {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotBlank;
+
+public class CustomerModel {
 
     private Long id;
+
+    @NotNull
+    @NotBlank
+    @JsonProperty("nome")
     private String name;
 
     public Long getId() {
